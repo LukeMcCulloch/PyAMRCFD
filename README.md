@@ -1,6 +1,6 @@
 # PyAMRCFD
 
-[PyCFD](https://github.com/LukeMcCulloch/PyCFD) extended with adaptive mesh refinement: local gradient based refinement on unstructured meshes
+This is my [PyCFD](https://github.com/LukeMcCulloch/PyCFD) codbase extended with adaptive mesh refinement: local gradient based refinement on unstructured meshes
 
 PyCFD is an unstructured solver for the Euler equations on a 2D grid, prototyped in Python.  Adaptive mesh refinement (AMR) was under construction there, but has moved to this repo.
 
