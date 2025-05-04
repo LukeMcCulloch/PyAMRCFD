@@ -29,7 +29,7 @@ Here is a preview of AMR mesh refinement.  Here the refinement (and coarsening) 
 # Unstructured mesh physics reconstruction
 
 ![LSQ gradient stencil at the cell colored in green](pics/stencil_57.png)
-
+NOthing facny... yet?
 
 
 # Testing
