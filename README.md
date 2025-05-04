@@ -13,7 +13,7 @@ PyCFD is an unstructured solver for the Euler equations on a 2D grid, prototyped
 
 Here is a preview of AMR mesh refinement.  
 
-![AMRdensity](pics/test_cases/DensityGradientBasedRefinement.png)
+![AMRdensity](pics/DensityGradientBasedRefinement.png)
 
 # Requirements
 
