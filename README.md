@@ -14,6 +14,7 @@ PyCFD is an unstructured solver for the Euler equations on a 2D grid, prototyped
 Here is a preview of AMR mesh refinement.  Here the refinement (and coarsening) criteria is the gradient of the density and this is a solution of the unsteady vortex case.
 
 ![AMRdensity](pics/DensityGradientBasedRefinement.png)
+Nothing fancy... yet!
 
 # Requirements
 
