@@ -1567,6 +1567,33 @@ class Solvers(object):
             ib = self.save[0]
             bface = self.save[1]
             """
+            
+            # Add a check to ensure boundary condition exists
+            if ib not in self.bc_type:
+                # Find the closest boundary face with a known BC type
+                closest_bc = None
+                min_distance = float('inf')
+                
+                for known_ib in self.bc_type:
+                    if known_ib < len(self.mesh.boundaryList):
+                        known_face = self.mesh.boundaryList[known_ib]
+                        distance = np.linalg.norm(
+                            np.array([bface.center[0] - known_face.center[0], 
+                                      bface.center[1] - known_face.center[1]])
+                        )
+                        if distance < min_distance:
+                            min_distance = distance
+                            closest_bc = self.bc_type[known_ib]
+                
+                # Assign the boundary condition
+                if closest_bc:
+                    self.bc_type[ib] = closest_bc
+                else:
+                    # Default to a safe boundary condition if no existing ones found
+                    self.bc_type[ib] = 'freestream'  # or whatever is appropriate
+            
+            
+            
             #Cell having a boundary face defined by the set of nodes j and j+1.
             c1 = bface.parentcell
             
@@ -1745,6 +1772,33 @@ class Solvers(object):
         #         first_found=True
         #         print(" Eliminating the normal momentum on slip wall boundary ", i)
         for ib, bface in enumerate(self.mesh.boundaryList):
+            
+            
+            # Add a check to ensure boundary condition exists
+            if ib not in self.bc_type:
+                # Find the closest boundary face with a known BC type
+                closest_bc = None
+                min_distance = float('inf')
+                
+                for known_ib in self.bc_type:
+                    if known_ib < len(self.mesh.boundaryList):
+                        known_face = self.mesh.boundaryList[known_ib]
+                        distance = np.linalg.norm(
+                            np.array([bface.center[0] - known_face.center[0], 
+                                      bface.center[1] - known_face.center[1]])
+                        )
+                        if distance < min_distance:
+                            min_distance = distance
+                            closest_bc = self.bc_type[known_ib]
+                
+                # Assign the boundary condition
+                if closest_bc:
+                    self.bc_type[ib] = closest_bc
+                else:
+                    # Default to a safe boundary condition if no existing ones found
+                    self.bc_type[ib] = 'freestream'  # or whatever is appropriate
+            # Continue with existing code
+            
             if self.bc_type[ib] == 'slip_wall_ymmtm_fix' and not first_found: 
                 #print(" Eliminating the normal momentum on slip wall boundary ", ib, bface.fid)
                 bface.special_ymtm = True
@@ -1752,6 +1806,33 @@ class Solvers(object):
                 
                 
         for ib, bface in enumerate(self.mesh.boundaryList):
+            
+            
+            # Add a check to ensure boundary condition exists
+            if ib not in self.bc_type:
+                # Find the closest boundary face with a known BC type
+                closest_bc = None
+                min_distance = float('inf')
+                
+                for known_ib in self.bc_type:
+                    if known_ib < len(self.mesh.boundaryList):
+                        known_face = self.mesh.boundaryList[known_ib]
+                        distance = np.linalg.norm(
+                            np.array([bface.center[0] - known_face.center[0], 
+                                      bface.center[1] - known_face.center[1]])
+                        )
+                        if distance < min_distance:
+                            min_distance = distance
+                            closest_bc = self.bc_type[known_ib]
+                
+                # Assign the boundary condition
+                if closest_bc:
+                    self.bc_type[ib] = closest_bc
+                else:
+                    # Default to a safe boundary condition if no existing ones found
+                    self.bc_type[ib] = 'freestream'  # or whatever is appropriate
+            # Continue with existing code
+            
             if self.bc_type[ib] == 'slip_wall_ymmtm_fix' and only_slip_wall:
                 ################################################################
                 # THIS IS A SPECIAL TREATMENT FOR SHOCK DIFFRACTION PROBLEM.

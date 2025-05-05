@@ -132,7 +132,7 @@ def test_amr_shock():
     
     # Run solver to develop the shock
     print("\nRunning initial solver to develop shock...")
-    solver.solver_solve(tfinal=0.05, dt=0.001, solver_type='explicit_unsteady_solver_efficient_shockdiffraction')
+    solver.solver_solve(tfinal=0.025, dt=0.001, solver_type='explicit_unsteady_solver_efficient_shockdiffraction')
     
     # Output solution
     solver.write_solution_to_vtk('shock_before_amr.vtk')
@@ -141,9 +141,9 @@ def test_amr_shock():
     for step in range(3):
         print(f"\nPerforming AMR step {step+1}")
         result = amr.adapt_mesh(field_name="density")
-        
-        print(f"Refined {len(result['refined'])} cells")
-        print(f"Coarsened {len(result['coarsened'])} cells")
+                
+        print(f"Refined {result['refined']} cells")
+        print(f"Coarsened {result['coarsened']} cells")
         print(f"Total cells: {result['num_cells']}")
         print(f"Active cells: {result['num_active_cells']}")
         print(f"Maximum refinement level: {result['max_level']}")
@@ -153,20 +153,34 @@ def test_amr_shock():
         
         # Run solver on adapted mesh
         print(f"\nRunning solver on adapted mesh (step {step+1})...")
-        solver.solver_solve(tfinal=0.01, dt=0.0005, solver_type='explicit_unsteady_solver_efficient_shockdiffraction')
+        solver.solver_solve(tfinal=0.0025, dt=0.0005, solver_type='explicit_unsteady_solver_efficient_shockdiffraction')
         
         # Output solution for visualization
         solver.write_solution_to_vtk(f'adapted_shock_step_{step+1}.vtk')
 
 
+    # Output final mesh statistics
+    stats = amr.get_mesh_statistics()
+    print("\nFinal Mesh Statistics:")
+    print(f"Total cells: {stats['total_cells']}")
+    print(f"Active cells: {stats['active_cells']}")
+    print(f"Maximum refinement level: {stats['max_level']}")
+    print("Cells per level:")
+    for level, count in stats['level_counts'].items():
+        print(f"  Level {level}: {count} cells")
+    print(f"Min cell volume: {stats['min_volume']:.6f}")
+    print(f"Max cell volume: {stats['max_volume']:.6f}")
+    print(f"Mean cell volume: {stats['mean_volume']:.6f}")
+    
+    
 def main():
     """Main function to run AMR tests"""
     # Test AMR with a vortex
-    test_amr_vortex()
+    #test_amr_vortex()
     
     # Test AMR with shock diffraction
     # Uncomment to test with shock diffraction
-    #test_amr_shock()
+    test_amr_shock()
     
     print("\nAll AMR tests completed.")
 
