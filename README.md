@@ -1,8 +1,11 @@
 # PyAMRCFD
 
-This is my [PyCFD](https://github.com/LukeMcCulloch/PyCFD) codbase extended with adaptive mesh refinement: local gradient based refinement on unstructured meshes
+This is my [PyCFD](https://github.com/LukeMcCulloch/PyCFD) codbase extended with adaptive mesh refinement(AMR): local gradient based refinement on unstructured meshes.
 
-PyCFD is an unstructured solver for the Euler equations on a 2D grid, prototyped in Python.  Adaptive mesh refinement (AMR) was under construction there, but has moved to this repo.
+Note that the AMR portion is under active development.  Once I get it to a happy spot I may port it back to PyCFD since that repo is followed by some.
+
+PyCFD and by extension, the code here at PyAMRCFD is an unstructured solver for the Euler equations on a 2D grid, prototyped in Python.  
+As stated above, adaptive mesh refinement was under construction there, but has moved to this repo.
 
 1. LSQ gradient reconstruction
 2. Roe approximate Riemmann solver for the flux 
